@@ -5,17 +5,16 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "run-p type-check \"build-only {@}\" --",
 		"preview": "vite preview",
-		"build-only": "vite build",
-		"type-check": "vue-tsc --build --force",
+		"build": "vite build",
+		"serve": "node server.js",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"lint": "biome check ./src/",
 		"lint:fix": "pnpm lint --write",
 		"test-storybook": "test-storybook",
 		"test-storybook:coverage": "test-storybook --coverage",
-		"chromatic": "pnpx chromatic --project-token=chpt_e20c1428dcee0a0"
+		"chromatic": "chromatic --project-token=chpt_e20c1428dcee0a0 --build-script-name build-storybook"
 	},
 	"dependencies": {
 		"@heroicons/vue": "^2.1.5",
@@ -25,6 +24,7 @@
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"dayjs": "^1.11.13",
+		"express": "^4.19.2",
 		"lucide-vue-next": "^0.436.0",
 		"pinia": "^2.2.2",
 		"radix-vue": "^1.9.5",

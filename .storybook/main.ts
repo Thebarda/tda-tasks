@@ -9,15 +9,7 @@ const config: StorybookConfig = {
 		"@chromatic-com/storybook",
 		"@storybook/addon-interactions",
 		"storybook-addon-mock-date",
-		{
-			name: "@storybook/addon-coverage",
-			options: {
-				istanbul: {
-					include: ["**/components/**"],
-					exclude: ["**/components/ui/**"],
-				},
-			},
-		},
+		"@storybook/addon-coverage",
 	],
 	framework: {
 		name: "@storybook/vue3-vite",

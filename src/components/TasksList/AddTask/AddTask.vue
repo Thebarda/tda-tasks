@@ -15,7 +15,6 @@ const emit = defineEmits<(e: "addTask", task: Omit<Task, "id">) => void>();
 
 const addTask = (newTask: Omit<Task, "id">): void => {
 	emit("addTask", newTask);
-	close();
 };
 </script>
 
@@ -28,7 +27,7 @@ const addTask = (newTask: Omit<Task, "id">): void => {
       <DialogHeader>
         <DialogTitle>Add task</DialogTitle>
       </DialogHeader>
-      <TaskForm :task="null" @submit-task="addTask" dialog-close/>
+      <TaskForm :task="null" @submit-task="addTask" dialog-close />
     </DialogContent>
   </Dialog>
 </template>

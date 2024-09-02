@@ -74,7 +74,6 @@ const submit = handleSubmit((values) => {
 	const formattedDueDate = values.dueDate
 		? { dueDate: dayjs(values.dueDate).valueOf() }
 		: {};
-
 	emit("submitTask", { ...omit(["dueDate"], values), ...formattedDueDate });
 });
 

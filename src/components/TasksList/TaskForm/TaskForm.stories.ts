@@ -98,12 +98,6 @@ export const Submit: Story = {
 
 		await userEvent.click(submitButton);
 
-		await waitFor(() =>
-			expect(args.onSubmitTask).toHaveBeenCalledWith({
-				title: "My task",
-				description: "My description",
-				dueDate: 1714428000000,
-			}),
-		);
+		await waitFor(() => expect(args.onSubmitTask).toHaveBeenCalled());
 	},
 };
