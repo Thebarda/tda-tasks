@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ChangeTaskStatusProps, Status, type Task } from "@/models/models";
+import type { ChangeTaskStatusProps, Status, Task } from "@/models/models";
 import { Button } from "@shad/button";
 import { Card } from "@shad/card";
 import { DialogContent } from "@shad/dialog";
