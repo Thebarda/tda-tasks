@@ -9,9 +9,8 @@ const {
 	updateSearchInput,
 	updateStatusFilter,
 	addTask,
-	updateTask,
-	deleteTask,
 	filteredTasks,
+	updateTasks,
 } = useTasksStore();
 </script>
 
@@ -22,7 +21,7 @@ const {
         <AddTask @add-task="addTask" />
         <TaskFilter @update-search="updateSearchInput" @update-status-filter="updateStatusFilter" />
       </div>
-      <TasksList :tasks="filteredTasks()" @update-task="updateTask" @delete-task="deleteTask" />
+      <TasksList :tasks="filteredTasks()" @update-tasks="updateTasks" />
     </div>
   </Page>
 </template>

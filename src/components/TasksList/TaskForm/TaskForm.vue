@@ -115,7 +115,7 @@ const isSubmitButtonDisabled = computed(() => {
               <FormControl>
                 <Button
                   variant="outline" :class="cn(
-                    'w-[160px] ps-3 text-start font-normal',
+                    'w-[180px] ps-3 text-start font-normal',
                     !value && 'text-muted-foreground',
                   )"
                 >

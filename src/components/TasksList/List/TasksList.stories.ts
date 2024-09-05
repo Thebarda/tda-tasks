@@ -68,7 +68,7 @@ export const Default: Story = {
 
 export const DeleteTask: Story = {
 	play: async ({ canvasElement, args }) => {
-		args.onDeleteTask = fn();
+		args.onUpdateTasks = fn();
 		const canvas = within(canvasElement);
 		const trashIcon = await canvas.findAllByTestId("TrashIcon");
 
@@ -78,13 +78,39 @@ export const DeleteTask: Story = {
 
 		userEvent.click(confirmationButton);
 
-		await waitFor(() => expect(args.onDeleteTask).toHaveBeenCalledWith(3));
+		await waitFor(() =>
+			expect(args.onUpdateTasks).toHaveBeenCalledWith([
+				{
+					id: 1,
+					title: "Task 1",
+					status: Status.ToDo,
+				},
+				{
+					id: 2,
+					title: "Task 2",
+					description: "Description",
+				},
+				{
+					id: 3,
+					title: "Task 3",
+					description: "Description",
+					dueDate: now.getTime(),
+				},
+				{
+					id: 5,
+					title: "Task 5",
+					description: "Description",
+					dueDate: now.getTime(),
+					status: Status.InProgress,
+				},
+			]),
+		);
 	},
 };
 
 export const UpdateTask: Story = {
 	play: async ({ canvasElement, args }) => {
-		args.onUpdateTask = fn();
+		args.onUpdateTasks = fn();
 		const canvas = within(canvasElement);
 		const editIcon = await canvas.findAllByTestId("EditIcon");
 
@@ -97,22 +123,45 @@ export const UpdateTask: Story = {
 		userEvent.click(confirmationButton);
 
 		await waitFor(() =>
-			expect(args.onUpdateTask).toHaveBeenCalledWith({
-				id: 0,
-				newTask: {
+			expect(args.onUpdateTasks).toHaveBeenCalledWith([
+				{
 					id: 1,
-					description: "Task description",
-					status: "toDo",
 					title: "Task 1",
+					description: "Task description",
+					status: Status.ToDo,
 				},
-			}),
+				{
+					id: 2,
+					title: "Task 2",
+					description: "Description",
+				},
+				{
+					id: 3,
+					title: "Task 3",
+					description: "Description",
+					dueDate: now.getTime(),
+				},
+				{
+					id: 4,
+					title: "Task 4",
+					description: "Description",
+					dueDate: date.getTime(),
+				},
+				{
+					id: 5,
+					title: "Task 5",
+					description: "Description",
+					dueDate: now.getTime(),
+					status: Status.InProgress,
+				},
+			]),
 		);
 	},
 };
 
 export const ChangeTaskStatus: Story = {
 	play: async ({ canvasElement, args }) => {
-		args.onUpdateTask = fn();
+		args.onUpdateTasks = fn();
 		const canvas = within(canvasElement);
 		const select = await canvas.findAllByTestId("Status select");
 		await userEvent.click(select[0]);
@@ -122,14 +171,37 @@ export const ChangeTaskStatus: Story = {
 		await expect(select[0]).toHaveTextContent("Completed");
 
 		await waitFor(() =>
-			expect(args.onUpdateTask).toHaveBeenCalledWith({
-				id: 0,
-				newTask: {
+			expect(args.onUpdateTasks).toHaveBeenCalledWith([
+				{
 					id: 1,
-					status: Status.Completed,
 					title: "Task 1",
+					status: Status.Completed,
 				},
-			}),
+				{
+					id: 2,
+					title: "Task 2",
+					description: "Description",
+				},
+				{
+					id: 3,
+					title: "Task 3",
+					description: "Description",
+					dueDate: now.getTime(),
+				},
+				{
+					id: 4,
+					title: "Task 4",
+					description: "Description",
+					dueDate: date.getTime(),
+				},
+				{
+					id: 5,
+					title: "Task 5",
+					description: "Description",
+					dueDate: now.getTime(),
+					status: Status.InProgress,
+				},
+			]),
 		);
 	},
 };

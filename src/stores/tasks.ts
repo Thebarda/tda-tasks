@@ -1,7 +1,7 @@
 import { Status, type Task } from "@/models/models";
 import { defineStore } from "pinia";
-import { filter, includes, isEmpty, pluck } from "ramda";
-import { ref, watchEffect } from "vue";
+import { filter, includes, isEmpty, pluck, prepend } from "ramda";
+import { ref, watch } from "vue";
 
 const key = "TDA-tasks";
 
@@ -29,25 +29,26 @@ export const useTasksStore = defineStore("tasks", () => {
 		return tasksFilteredBySearchInput;
 	};
 
+	const updateTasks = (newTasks: Array<Task>): void => {
+		tasks.value = newTasks;
+	};
+
 	const addTask = (task: Omit<Task, "id">): void => {
 		const ids = pluck("id", tasks.value) as Array<number>;
-		tasks.value.unshift({
-			...task,
-			id: isEmpty(ids) ? 1 : Math.max(...ids) + 1,
-		});
+		const newTasks = prepend(
+			{
+				...task,
+				id: isEmpty(ids) ? 1 : Math.max(...ids) + 1,
+			},
+			tasks.value,
+		);
+
+		updateTasks(newTasks);
 	};
 
-	watchEffect(() => {
+	watch(tasks, () => {
 		localStorage.setItem(key, JSON.stringify(tasks.value));
 	});
-
-	const updateTask = ({ id, newTask }): void => {
-		tasks.value.splice(id, 1, newTask);
-	};
-
-	const deleteTask = (id: number): void => {
-		tasks.value.splice(id, 1);
-	};
 
 	const updateSearchInput = (newSearch: string): void => {
 		searchInput.value = newSearch;
@@ -60,10 +61,9 @@ export const useTasksStore = defineStore("tasks", () => {
 	return {
 		tasks,
 		addTask,
-		updateTask,
 		updateSearchInput,
 		updateStatusFilter,
-		deleteTask,
 		filteredTasks,
+		updateTasks,
 	};
 });
