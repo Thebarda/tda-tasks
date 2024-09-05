@@ -1,7 +1,7 @@
 import { Status, type Task } from "@/models/models";
 import { defineStore } from "pinia";
 import { filter, includes, isEmpty, pluck, prepend } from "ramda";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 
 const key = "TDA-tasks";
 
@@ -11,7 +11,7 @@ export const useTasksStore = defineStore("tasks", () => {
 	const searchInput = ref("");
 	const statusFilters = ref<Array<Status>>([]);
 
-	const filteredTasks = () => {
+	const filteredTasks = computed(() => {
 		const tasksFilteredByStatus = filter(
 			({ status }) =>
 				isEmpty(statusFilters.value) ||
@@ -27,7 +27,7 @@ export const useTasksStore = defineStore("tasks", () => {
 		);
 
 		return tasksFilteredBySearchInput;
-	};
+	});
 
 	const updateTasks = (newTasks: Array<Task>): void => {
 		tasks.value = newTasks;
@@ -35,13 +35,11 @@ export const useTasksStore = defineStore("tasks", () => {
 
 	const addTask = (task: Omit<Task, "id">): void => {
 		const ids = pluck("id", tasks.value) as Array<number>;
-		const newTasks = prepend(
-			{
-				...task,
-				id: isEmpty(ids) ? 1 : Math.max(...ids) + 1,
-			},
-			tasks.value,
-		);
+		const newTask = {
+			...task,
+			id: isEmpty(ids) ? 1 : Math.max(...ids) + 1,
+		};
+		const newTasks = prepend(newTask, tasks.value);
 
 		updateTasks(newTasks);
 	};

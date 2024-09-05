@@ -1,45 +1,11 @@
 <script setup lang="ts">
-import { toTypedSchema } from "@vee-validate/zod";
-import { isEmpty } from "ramda";
-import { useForm } from "vee-validate";
-import { computed } from "vue";
-import { z } from "zod";
 import { FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import AuthenticationFormWrapper from "./AuthenticationFormWrapper.vue";
-
-const formSchema = toTypedSchema(
-	z
-		.object({
-			email: z.string().email("Enter a valid email"),
-			password: z.string().min(1, "Required"),
-			confirmPassword: z.string().min(1, "Required"),
-		})
-		.refine((data) => data.password === data.confirmPassword, {
-			message: "Passwords don't match",
-			path: ["confirmPassword"],
-		}),
-);
-
-const { handleSubmit, errors, isFieldTouched, isSubmitting } = useForm({
-	validationSchema: formSchema,
-	validateOnMount: true,
-	initialValues: {
-		email: "",
-		password: "",
-		confirmPassword: "",
-	},
-});
-
-const submit = handleSubmit((values) => {});
-
-const isSubmitButtonDisabled = computed(() => {
-	return isSubmitting.value || !isEmpty(errors.value);
-});
 </script>
 
 <template>
-  <AuthenticationFormWrapper>
+  <AuthenticationFormWrapper is-sign-up>
     <template v-slot="{ isFieldTouched }">
       <FormField v-slot="{ componentField }" name="email">
         <FormItem class="w-full">
