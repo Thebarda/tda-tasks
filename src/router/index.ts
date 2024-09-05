@@ -1,5 +1,6 @@
-import SignIn from "@/views/SignIn.vue";
-import SignUp from "@/views/SignUp.vue";
+import SignInView from "@/views/SignInView.vue";
+import SignUpView from "@/views/SignUpView.vue";
+import TasksView from "@/views/TasksView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
@@ -14,12 +15,17 @@ const router = createRouter({
 		{
 			path: "/signin",
 			name: "signin",
-			component: SignIn,
+			component: SignInView,
 		},
 		{
 			path: "/signup",
 			name: "signup",
-			component: SignUp,
+			component: SignUpView,
+		},
+		{
+			path: "/tasks",
+			name: "tasks",
+			component: TasksView,
 		},
 	],
 });
