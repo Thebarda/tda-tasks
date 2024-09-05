@@ -6,20 +6,23 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"correctness": {
+				"noUndeclaredVariables": "error"
+			}
 		}
 	},
 	"overrides": [
-      {
-        "include": ["*.svelte", "*.astro", "*.vue"],
-        "linter": {
-          "rules": {
-            "style": {
-              "useConst": "off",
-              "useImportType": "off"
-            }
-          }
-        }
-      }
-    ]
+		{
+			"include": ["*.svelte", "*.astro", "*.vue"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	]
 }
