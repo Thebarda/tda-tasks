@@ -76,14 +76,14 @@ const changeStatus = (newStatus: Status): void => {
 		</div>
 		<div class="basis-10">
 			<Button variant="outline" size="icon" @click="editTask">
-				<EditIcon class="size-6 text-gray-500 hover:text-blue-500" />
+				<Edit class="size-6 text-gray-500 hover:text-blue-500" />
 			</Button>
 		</div>
 		<div class="basis-14 h-full">
 			<Popover>
 				<PopoverTrigger as-child>
 					<Button variant="outline" size="icon" @click="askBeforeDelete">
-						<TrashIcon class="size-6 text-gray-500 hover:text-red-500" />
+						<Trash class="size-6 text-gray-500 hover:text-red-500" />
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent class="w-80 flex flex-col items-end" default-open v-if="isAskingBeforeDelete">

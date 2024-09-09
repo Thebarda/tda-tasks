@@ -61,7 +61,7 @@ watch(input, () => {
 		<div class="relative w-52 max-w-sm items-center">
 			<Input type="text" class="pl-10" v-model="input" placeholder="Search" data-testid="search"/>
 			<span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
-				<SearchIcon class="size-6 text-muted-foreground" />
+				<Search class="size-6 text-muted-foreground" />
 			</span>
 		</div>
     <div class="border-l-2" />

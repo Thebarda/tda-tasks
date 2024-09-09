@@ -19,7 +19,7 @@ const addTask = (newTask: Omit<Task, "id">): void => {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <Button variant="outline" class="flex flex-row gap-2"><AddIcon class="size-5" />Add task</Button>
+      <Button variant="outline" class="flex flex-row gap-2"><Add class="size-5" />Add task</Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
