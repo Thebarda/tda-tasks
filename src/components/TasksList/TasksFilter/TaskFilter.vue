@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { SearchIcon } from "@/components/Icons";
 import { Status, type StatusSelectEntry } from "@/models/models";
 import { Button } from "@shad/button";
 import { Input } from "@shad/input";

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ChangeTaskStatusProps, Task } from "@/models/models";
 import { equals, find, findIndex, reject, update } from "ramda";
-import TaskComponent from "../Task/Task.vue";
 
 interface Props {
 	tasks: Array<Task>;
@@ -35,6 +34,6 @@ const deleteTask = (id: number): void => {
 
 <template>
   <div class="flex flex-col gap-3 max-h-[80vh] overflow-auto scroll-smooth">
-    <TaskComponent v-for="task in props.tasks" :key="task.id" :task="task" @change-task-status="changeTaskStatus" @delete-task="deleteTask" @edit-task="editTask" />
+    <Task v-for="task in props.tasks" :key="task.id" :task="task" @change-task-status="changeTaskStatus" @delete-task="deleteTask" @edit-task="editTask" />
   </div>
 </template>

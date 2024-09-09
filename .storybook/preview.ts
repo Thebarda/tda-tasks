@@ -5,11 +5,25 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { createPinia } from "pinia";
 import type { App } from "vue";
 import "../src/assets/index.css";
+import {
+	iconComponents,
+	statusSelectComponents,
+	tasksListComponents,
+} from "../src/components";
+import { registerGlobalComponents } from "../src/registerComponents";
 
 const pinia = createPinia();
 
 setup((app: App) => {
 	app.use(pinia);
+	registerGlobalComponents({
+		app,
+		components: [
+			...iconComponents,
+			...tasksListComponents,
+			...statusSelectComponents,
+		],
+	});
 });
 
 dayjs.extend(localizedFormat);

@@ -8,8 +8,6 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@shad/dialog";
-import { AddIcon } from "../../Icons";
-import TaskForm from "../TaskForm/TaskForm.vue";
 
 const emit = defineEmits<(e: "addTask", task: Omit<Task, "id">) => void>();
 

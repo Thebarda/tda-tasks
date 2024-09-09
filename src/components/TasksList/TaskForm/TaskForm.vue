@@ -27,7 +27,6 @@ import { isEmpty, omit } from "ramda";
 import { useForm } from "vee-validate";
 import { computed } from "vue";
 import * as z from "zod";
-import { CalendarIcon } from "../../Icons";
 
 interface Props {
 	task: Task | null;
@@ -88,68 +87,62 @@ const isSubmitButtonDisabled = computed(() => {
 </script>
 
 <template>
-  <form @submit="submit" class="flex flex-col gap-2">
-    <FormField v-slot="{ componentField }" name="title">
-      <FormItem>
-        <label for="title" class="text-sm font-medium leading-none">Title</label>
-        <FormControl v-auto-animate>
-          <Input required data-testid="title" type="text" placeholder="My task" v-bind="componentField" />
-        </FormControl>
-        <FormMessage v-if="isFieldTouched('title')"/>
-      </FormItem>
-    </FormField>
-    <FormField v-slot="{ componentField }" name="description">
-      <FormItem>
-        <FormLabel for="description">Description</FormLabel>
-        <FormControl>
-          <Input type="text" data-testid="description" placeholder="Description" v-bind="componentField" />
-        </FormControl>
-      </FormItem>
-    </FormField>
-    <FormField name="dueDate">
-      <FormItem class="flex flex-col gap-1 mt-1">
-        <FormLabel for="dueDate">Due date</FormLabel>
-        <FormControl>
-          <Popover>
-            <PopoverTrigger as-child>
-              <FormControl>
-                <Button
-                  variant="outline" :class="cn(
-                    'w-[180px] ps-3 text-start font-normal',
-                    !value && 'text-muted-foreground',
-                  )"
-                >
-                  <span>{{ value ? df.format(toDate(value)) : "Pick a date" }}</span>
-                  <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
-                </Button>
-                <input hidden>
-              </FormControl>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar
-                v-model="value"
-                calendar-label="Due date"
-                :min-value="today(getLocalTimeZone())"
-                @update:model-value="(v: DateValue | undefined) => {
-                  if (v) {
-                    setFieldValue('dueDate', v.toString());
-                    return;
-                  }
-                    setFieldValue('dueDate', undefined)
-                }"
-              />
-            </PopoverContent>
-          </Popover>
-        </FormControl>
-      </FormItem>
-    </FormField>
-    <DialogClose as-child v-if="dialogClose">
-      <Button type="submit" class="mt-1 self-end" :disabled="isSubmitButtonDisabled">
-        Save
-      </Button>
-    </DialogClose>
-    <Button v-else type="submit" class="mt-1 self-end" :disabled="isSubmitButtonDisabled">
-      Save
-    </Button>
-  </form>
+	<form @submit="submit" class="flex flex-col gap-2">
+		<FormField v-slot="{ componentField }" name="title">
+			<FormItem>
+				<label for="title" class="text-sm font-medium leading-none">Title</label>
+				<FormControl v-auto-animate>
+					<Input required data-testid="title" type="text" placeholder="My task" v-bind="componentField" />
+				</FormControl>
+				<FormMessage v-if="isFieldTouched('title')" />
+			</FormItem>
+		</FormField>
+		<FormField v-slot="{ componentField }" name="description">
+			<FormItem>
+				<FormLabel for="description">Description</FormLabel>
+				<FormControl>
+					<Input type="text" data-testid="description" placeholder="Description" v-bind="componentField" />
+				</FormControl>
+			</FormItem>
+		</FormField>
+		<FormField name="dueDate">
+			<FormItem class="flex flex-col gap-1 mt-1">
+				<FormLabel for="dueDate">Due date</FormLabel>
+				<FormControl>
+					<Popover>
+						<PopoverTrigger as-child>
+							<FormControl>
+								<Button variant="outline" :class="cn(
+									'w-[180px] ps-3 text-start font-normal',
+									!value && 'text-muted-foreground',
+								)">
+									<span>{{ value ? df.format(toDate(value)) : "Pick a date" }}</span>
+									<CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
+								</Button>
+								<input hidden>
+							</FormControl>
+						</PopoverTrigger>
+						<PopoverContent class="w-auto p-0">
+							<Calendar v-model="value" calendar-label="Due date" :min-value="today(getLocalTimeZone())"
+								@update:model-value="(v: DateValue | undefined) => {
+									if (v) {
+										setFieldValue('dueDate', v.toString());
+										return;
+									}
+									setFieldValue('dueDate', undefined)
+								}" />
+						</PopoverContent>
+					</Popover>
+				</FormControl>
+			</FormItem>
+		</FormField>
+		<DialogClose as-child v-if="dialogClose">
+			<Button type="submit" class="mt-1 self-end" :disabled="isSubmitButtonDisabled">
+				Save
+			</Button>
+		</DialogClose>
+		<Button v-else type="submit" class="mt-1 self-end" :disabled="isSubmitButtonDisabled">
+			Save
+		</Button>
+	</form>
 </template>

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Page from "@/components/Layout/Page.vue";
-import AddTask from "@/components/TasksList/AddTask/AddTask.vue";
-import TasksList from "@/components/TasksList/List/TasksList.vue";
-import TaskFilter from "@/components/TasksList/TasksFilter/TaskFilter.vue";
 import { useTasksStore } from "@/stores/tasks";
 
 const tasks = useTasksStore();

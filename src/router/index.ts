@@ -1,8 +1,6 @@
-import { useAuthenticatedUser } from "@/stores/user";
 import SignInView from "@/views/SignInView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import TasksView from "@/views/TasksView.vue";
-import { equals, includes, isNil } from "ramda";
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
@@ -32,19 +30,19 @@ const router = createRouter({
 	],
 });
 
-router.beforeEach((to) => {
-	const auth = useAuthenticatedUser();
+// router.beforeEach((to) => {
+// 	const auth = useAuthenticatedUser();
 
-	if (isNil(auth.authenticatedEmail) && equals(to.name, "tasks")) {
-		return "/";
-	}
+// 	if (isNil(auth.authenticatedEmail) && equals(to.name, "tasks")) {
+// 		return "/";
+// 	}
 
-	if (
-		auth.authenticatedEmail &&
-		includes(to.name, ["signin", "signup", "home"])
-	) {
-		return "/tasks";
-	}
-});
+// 	if (
+// 		auth.authenticatedEmail &&
+// 		includes(to.name, ["signin", "signup", "home"])
+// 	) {
+// 		return "/tasks";
+// 	}
+// });
 
 export default router;
